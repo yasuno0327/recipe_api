@@ -1,0 +1,22 @@
+version: "3"
+services:
+  api:
+    image: api:latest
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    env_file:
+      - production.env
+    networks:
+      - recipe-network
+  db:
+    image: db:latest
+    env_file:
+      - production.env
+    networks:
+      - recipe-network
+
+networks:
+  recipe-network:
+    external: true
