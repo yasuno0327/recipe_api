@@ -1,6 +1,7 @@
 version: "3"
 services:
   api:
+    container_name: recipe_api
     build: api
     ports:
       - 3000:3000
@@ -11,6 +12,7 @@ services:
     networks:
       - recipe-network
   db:
+    container_name: recipe_db
     build: db
     env_file:
       - development.env
