@@ -7,6 +7,8 @@ services:
       - 3000:3000
     depends_on:
       - db
+    volumes:
+      - ./api:/go/src/api
     env_file:
       - development.env
     networks:
