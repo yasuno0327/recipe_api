@@ -2,6 +2,7 @@ version: "3"
 services:
   api:
     container_name: recipe_api
+    entrypoint: /go/src/api/startserver.sh
     build: api
     ports:
       - 3000:3000
