@@ -9,7 +9,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./api:/go/src/api
+      - ./api:/go/src/api:cached
     env_file:
       - development.env
     networks:
