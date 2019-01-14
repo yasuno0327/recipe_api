@@ -31,3 +31,12 @@ func (controller *RecipeController) Create(w http.ResponseWriter, r *http.Reques
 	}
 	w.WriteHeader(http.StatusOK)
 }
+
+func (controller *RecipeController) ListAll(w http.ResponseWriter, r *http.Request) {
+	recipes, err := controller.Usecase.RecipeList()
+	if err != nil {
+		gateway.WriteError(w, err)
+		return
+	}
+	gateway.WriteRecipeList(w, recipes)
+}

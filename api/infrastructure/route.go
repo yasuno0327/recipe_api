@@ -23,6 +23,7 @@ func recipes(r *mux.Router) {
 	r.HandleFunc(recipePrefix, func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
+			recipeController.ListAll(w, r)
 		case http.MethodPost:
 			recipeController.Create(w, r)
 		default:

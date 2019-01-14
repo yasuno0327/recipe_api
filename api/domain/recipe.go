@@ -3,7 +3,7 @@ package domain
 import "time"
 
 type Recipe struct {
-	ID          string    `json:"id,omitempty"`
+	ID          int       `json:"id,omitempty"`
 	Title       string    `json:"title,omitempty"`
 	MakingTime  string    `json:"making_time,omitempty"`
 	Serves      string    `json:"serves,omitempty"`

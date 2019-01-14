@@ -1,6 +1,8 @@
 package usecase
 
-import "api/domain"
+import (
+	"api/domain"
+)
 
 type RecipeUsecase struct {
 	RecipeRepository RecipeRepository
@@ -11,10 +13,10 @@ func (usecase *RecipeUsecase) Create(recipe *domain.Recipe) error {
 	return err
 }
 
-// func (usecase *RecipeUsecase) RecipeList() (*[]domain.Recipe, error) {
-// 	recipes, err := usecase.RecipeRepository.FindAll()
-// 	return recipes, err
-// }
+func (usecase *RecipeUsecase) RecipeList() (domain.RecipeList, error) {
+	recipes, err := usecase.RecipeRepository.FindAll()
+	return recipes, err
+}
 
 // func (usecase *RecipeUsecase) Find(id int) (*domain.Recipe, error) {
 // 	recipe, err := usecase.RecipeRepository.Find(id)

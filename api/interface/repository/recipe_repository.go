@@ -2,7 +2,6 @@ package repository
 
 import (
 	"api/domain"
-	"log"
 )
 
 type RecipeRepository struct {
@@ -10,7 +9,7 @@ type RecipeRepository struct {
 }
 
 func (repo *RecipeRepository) Create(recipe *domain.Recipe) error {
-	query, err := repo.Execute(
+	_, err := repo.Execute(
 		"INSERT INTO recipes (title, making_time, serves, ingredients, cost) VALUES (?, ?, ?, ?, ?)",
 		recipe.Title,
 		recipe.MakingTime,
@@ -21,12 +20,34 @@ func (repo *RecipeRepository) Create(recipe *domain.Recipe) error {
 	if err != nil {
 		return err
 	}
-	log.Println(query)
 	return nil
 }
 
-// func FindAll() (domain.RecipeList, error) {
-// }
+func (repo *RecipeRepository) FindAll() (recipes domain.RecipeList, err error) {
+	rows, err := repo.Query("SELECT * FROM recipes")
+	defer rows.Close()
+	if err != nil {
+		return nil, err
+	}
+	for rows.Next() {
+		var id, cost int
+		var title, makingTime, serves, ingredients string
+		var createdAt, updatedAt []uint8
+		if err := rows.Scan(&id, &title, &makingTime, &serves, &ingredients, &cost, &createdAt, &updatedAt); err != nil {
+			panic(err)
+			continue
+		}
+		recipe := domain.Recipe{
+			ID:          id,
+			Title:       title,
+			MakingTime:  makingTime,
+			Serves:      serves,
+			Ingredients: ingredients,
+		}
+		recipes = append(recipes, recipe)
+	}
+	return
+}
 
 // func Find() (domain.Recipe, error) {
 // }
