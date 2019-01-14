@@ -12,7 +12,7 @@ type Error struct {
 
 func WriteError(w http.ResponseWriter, err error) {
 	json.NewEncoder(w).Encode(Error{Message: err.Error()})
-	w.WriteHeader(http.StatusBadRequest)
+	w.WriteHeader(http.StatusInternalServerError)
 }
 
 func DecodeBody(domain interface{}, body io.Reader) interface{} {
