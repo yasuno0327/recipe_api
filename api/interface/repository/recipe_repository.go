@@ -34,7 +34,6 @@ func (repo *RecipeRepository) FindAll() (recipes domain.RecipeList, err error) {
 		var title, makingTime, serves, ingredients string
 		var createdAt, updatedAt []uint8
 		if err := rows.Scan(&id, &title, &makingTime, &serves, &ingredients, &cost, &createdAt, &updatedAt); err != nil {
-			panic(err)
 			continue
 		}
 		recipe := domain.Recipe{
