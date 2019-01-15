@@ -6,6 +6,9 @@ import (
 	"api/interface/repository"
 	"api/usecase"
 	"net/http"
+	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
 type RecipeController struct {
@@ -39,4 +42,15 @@ func (controller *RecipeController) ListAll(w http.ResponseWriter, r *http.Reque
 		return
 	}
 	gateway.WriteRecipeList(w, recipes)
+}
+
+func (controller *RecipeController) DetailRecipe(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, _ := strconv.Atoi(vars["id"])
+	recipe, err := controller.Usecase.DetailRecipe(id)
+	if err != nil {
+		gateway.WriteError(w, err)
+		return
+	}
+	gateway.WriteRecipe(w, recipe)
 }

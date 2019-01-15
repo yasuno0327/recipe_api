@@ -18,10 +18,10 @@ func (usecase *RecipeUsecase) RecipeList() (domain.RecipeList, error) {
 	return recipes, err
 }
 
-// func (usecase *RecipeUsecase) Find(id int) (*domain.Recipe, error) {
-// 	recipe, err := usecase.RecipeRepository.Find(id)
-// 	return recipe, err
-// }
+func (usecase *RecipeUsecase) DetailRecipe(id int) (domain.Recipe, error) {
+	recipe, err := usecase.RecipeRepository.Find(id)
+	return recipe, err
+}
 
 // func (usecase *RecipeUsecase) Update(id int, recipe *domain.Recipe) error {
 // 	err := usecase.RecipeRepository.Update(id, recipe)

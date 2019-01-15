@@ -34,6 +34,7 @@ func recipes(r *mux.Router) {
 	r.HandleFunc(recipePrefix+"/{id:[0-9]+}", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
+			recipeController.DetailRecipe(w, r)
 		case http.MethodPatch:
 		case http.MethodDelete:
 		default:

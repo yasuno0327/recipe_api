@@ -27,5 +27,8 @@ func DecodeBody(domain interface{}, body io.Reader) interface{} {
 
 func WriteRecipeList(w http.ResponseWriter, recipes domain.RecipeList) {
 	json.NewEncoder(w).Encode(RecipeList{Recipes: recipes})
-	w.WriteHeader(http.StatusOK)
+}
+
+func WriteRecipe(w http.ResponseWriter, recipe domain.Recipe) {
+	json.NewEncoder(w).Encode(recipe)
 }

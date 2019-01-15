@@ -48,8 +48,26 @@ func (repo *RecipeRepository) FindAll() (recipes domain.RecipeList, err error) {
 	return
 }
 
-// func Find() (domain.Recipe, error) {
-// }
+func (repo *RecipeRepository) Find(id int) (domain.Recipe, error) {
+	row, err := repo.Query("SELECT * FROM recipes WHERE id = ?", id)
+	if err != nil {
+		return domain.Recipe{}, err
+	}
+	defer row.Close()
+	var cost int
+	var title, makingTime, serves, ingredients string
+	var createdAt, updatedAt []uint8
+	row.Next()
+	row.Scan(&id, &title, &makingTime, &serves, &ingredients, &cost, &createdAt, &updatedAt)
+	recipe := domain.Recipe{
+		ID:          id,
+		Title:       title,
+		MakingTime:  makingTime,
+		Serves:      serves,
+		Ingredients: ingredients,
+	}
+	return recipe, nil
+}
 
 // func Update() error {
 // }
