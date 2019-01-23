@@ -36,6 +36,7 @@ func recipes(r *mux.Router) {
 		case http.MethodGet:
 			recipeController.DetailRecipe(w, r)
 		case http.MethodPatch:
+			recipeController.UpdateRecipe(w, r)
 		case http.MethodDelete:
 		default:
 			w.WriteHeader(404)

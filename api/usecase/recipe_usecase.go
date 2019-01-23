@@ -23,10 +23,10 @@ func (usecase *RecipeUsecase) DetailRecipe(id int) (domain.Recipe, error) {
 	return recipe, err
 }
 
-// func (usecase *RecipeUsecase) Update(id int, recipe *domain.Recipe) error {
-// 	err := usecase.RecipeRepository.Update(id, recipe)
-// 	return err
-// }
+func (usecase *RecipeUsecase) Update(id int, recipe *domain.Recipe) error {
+	err := usecase.RecipeRepository.Update(id, recipe)
+	return err
+}
 
 // func (usecase *RecipeUsecase) Destroy(id int) error {
 // 	err := usecase.RecipeRepository.Delete(id)

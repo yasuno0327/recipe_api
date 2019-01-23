@@ -5,6 +5,9 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+	"strconv"
+
+	"github.com/gorilla/mux"
 )
 
 type RecipeList struct {
@@ -13,6 +16,12 @@ type RecipeList struct {
 
 type Error struct {
 	Message string `json:"message"`
+}
+
+func GetID(r *http.Request) int {
+	vars := mux.Vars()
+	id, _ := strconv.Atoi(vars["id"])
+	return id
 }
 
 func WriteError(w http.ResponseWriter, err error) {
